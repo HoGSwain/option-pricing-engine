@@ -36,12 +36,14 @@ def explain(
     bs_price: float,
     greeks: Greeks,
     binomial_price: float,
+    binomial_european: float,
     mc_price: float,
     mc_stderr: float,
     early_exercise_premium: float,
     methods_agree: bool,
     vol_source: str,
     source: str,
+    used_market_data: bool = False,
     implied_vol: Optional[float] = None,
 ) -> Explanation:
     """Deterministic, plain-language explanation of an option analysis."""
@@ -61,13 +63,15 @@ def explain(
         f"the underlying. Gamma {greeks.gamma:.4f}; vega ${greeks.vega / 100:.3f} per 1% of "
         f"volatility; theta ${greeks.theta / 365:.3f} per calendar day (time decay)."
     )
+    # The cross-check is between the three *European* prices (BS and MC are European,
+    # so the tree must be too); the American value is explained separately below.
     findings.append(
         f"Three independent methods agree: Black-Scholes ${bs_price:.2f}, a binomial tree "
-        f"${binomial_price:.2f}, and Monte Carlo ${mc_price:.2f} (± ${mc_stderr:.2f}) — a "
+        f"${binomial_european:.2f}, and Monte Carlo ${mc_price:.2f} (± ${mc_stderr:.2f}) — a "
         f"cross-check that the price is right."
         if methods_agree
         else (
-            f"Method prices: Black-Scholes ${bs_price:.2f}, binomial ${binomial_price:.2f}, "
+            f"Method prices: Black-Scholes ${bs_price:.2f}, binomial ${binomial_european:.2f}, "
             f"Monte Carlo ${mc_price:.2f} (± ${mc_stderr:.2f})."
         )
     )
@@ -93,9 +97,9 @@ def explain(
             "which will differ from a traded option's price; back out implied volatility from a "
             "live quote for a market-consistent number."
         )
-    if source == "synthetic":
+    if used_market_data and source == "synthetic":
         limitations.append(
-            "Any ticker inputs come from synthetic (seeded GBM) data for offline reproducibility, "
+            "The ticker inputs come from synthetic (seeded GBM) data for offline reproducibility, "
             "not real market data."
         )
     limitations += [

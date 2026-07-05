@@ -114,13 +114,15 @@ def run_option_analysis(
         bs_price,
         grk,
         binomial_price,
+        binomial_european,
         mc_price,
         mc_stderr,
         early,
         methods_agree,
         vol_source,
         source,
-        implied_vol,
+        used_market_data=ticker is not None,
+        implied_vol=implied_vol,
     )
     row = {
         "spot": spot,

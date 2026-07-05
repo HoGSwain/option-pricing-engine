@@ -35,6 +35,5 @@
 ## Limitations & assumptions
 
 - Black-Scholes assumes lognormal prices, constant volatility, no jumps, and continuous costless hedging; the analytic price and Greeks are for European exercise.
-- Any ticker inputs come from synthetic (seeded GBM) data for offline reproducibility, not real market data.
 - Greeks are local sensitivities (first/second order); Monte Carlo carries the stated sampling standard error.
 - This engine supports human derivatives analysis; it does not make trading decisions.

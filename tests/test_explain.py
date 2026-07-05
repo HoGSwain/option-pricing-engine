@@ -31,3 +31,23 @@ def test_explanation_is_deterministic():
     b = run_option_analysis(strike=100, maturity=1, spot=100, volatility=0.20).explanation
     assert a.findings == b.findings
     assert a.limitations == b.limitations
+
+
+def test_american_agreement_line_uses_european_not_american_price():
+    # The cross-check must compare three EUROPEAN prices; the American value goes
+    # on its own premium line (regression: the agreement line once showed the
+    # American price and self-contradicted).
+    r = run_option_analysis(
+        strike=100, maturity=1, spot=90, volatility=0.30, kind="put", exercise="american"
+    )
+    assert r.early_exercise_premium > 0.01  # the two binomial prices genuinely differ
+    agreement = next(f for f in r.explanation.findings if f.startswith("Three independent"))
+    assert f"${r.binomial_european:.2f}" in agreement
+    assert f"${r.binomial_price:.2f}" not in agreement
+    premium_line = next(f for f in r.explanation.findings if "early-exercise premium" in f)
+    assert f"${r.binomial_price:.2f}" in premium_line
+
+
+def test_no_synthetic_caveat_on_explicit_inputs():
+    r = run_option_analysis(strike=100, maturity=1, spot=100, volatility=0.20)
+    assert not any("synthetic" in lim.lower() for lim in r.explanation.limitations)
