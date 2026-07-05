@@ -1,0 +1,12 @@
+pae @ git+https://github.com/HoGSwain/portfolio-analytics-engine.git@1a676758000059c526e3e0cdf8b79da07262a32d
+numpy>=1.24
+scipy>=1.11
+pandas>=2.0
+pyarrow>=14.0
+typer>=0.12
+loguru>=0.7
+tabulate>=0.9
+pytest>=8.0
+pytest-cov>=5.0
+ruff>=0.5
+black>=24.0

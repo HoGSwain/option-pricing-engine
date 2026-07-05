@@ -1,0 +1,9 @@
+{
+  "ticker": "AAPL",
+  "source": "synthetic",
+  "download_timestamp_utc": "2026-07-05T07:14:05.805424+00:00",
+  "row_count": 2220,
+  "checksum_md5": "4ff2cce36fc07f61835e97c200e98922",
+  "package_version": "0.1.0",
+  "preprocessing_version": "1.0.0"
+}

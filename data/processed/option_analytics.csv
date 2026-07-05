@@ -1,0 +1,2 @@
+spot,strike,maturity,rate,volatility,dividend,kind,exercise,bs_price,binomial_price,binomial_european,mc_price,mc_stderr,early_exercise_premium,greek_delta,greek_gamma,greek_vega,greek_theta,greek_rho,implied_vol
+100.0,100.0,1.0,0.05,0.2,0.0,call,european,10.450583572185565,10.44658513644654,10.44658513644654,10.420541193153111,0.04676990252081818,0.0,0.6368306511756191,0.018762017345846895,37.52403469169379,-6.414027546438197,53.232481545376345,

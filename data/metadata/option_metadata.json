@@ -1,0 +1,19 @@
+{
+  "option": {
+    "spot": 100.0,
+    "strike": 100.0,
+    "maturity": 1.0,
+    "rate": 0.05,
+    "volatility": 0.2,
+    "dividend": 0.0,
+    "kind": "call",
+    "exercise": "european"
+  },
+  "spot_source": "given",
+  "vol_source": "given",
+  "source": "synthetic",
+  "generated_utc": "2026-07-05T12:01:22.875780+00:00",
+  "analytics_checksum_md5": "a5f74165a5f19bd4bd53281c288d3a94",
+  "package_version": "0.1.0",
+  "option_version": "1.0.0"
+}

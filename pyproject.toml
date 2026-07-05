@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ope"
+version = "0.1.0"
+description = "Option Pricing Engine — AIFEL Project 6: Black-Scholes, binomial (European & American), and Monte-Carlo option pricing with Greeks and implied volatility. Core math is standalone; an optional path prices options on real tickers via Projects 1-2."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "AIFEL Portfolio" }]
+dependencies = [
+    "pae @ git+https://github.com/HoGSwain/portfolio-analytics-engine.git@1a676758000059c526e3e0cdf8b79da07262a32d",
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "typer>=0.12",
+    "loguru>=0.7",
+    "tabulate>=0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.5", "black>=24.0"]
+notebook = ["matplotlib>=3.8", "ipykernel>=6.0"]
+
+[project.scripts]
+ope = "ope.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
